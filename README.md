@@ -3,12 +3,14 @@
 打开QGC
 ## terminator 1-3
 ```bash
-cd /home/w/Desktop/tep
+# 进入项目目录
+cd /home/w/Desktop/ros2_drone_sim
 python3 offboard_ros2.py
 ```
 
 ```bash
-cd /home/w/Desktop/tep
+# 进入项目目录
+cd /home/w/Desktop/ros2_drone_sim 
 python3 visualization_scoring.py 
 ```
 
@@ -21,7 +23,7 @@ rviz2
 ```bash
 source /opt/ros/humble/setup.bash
 cd ~/PX4-Autopilot/
-~/PX4-Autopilot$ make px4
+make px4_sitl gz_x500
 ```
 
 ```bash
