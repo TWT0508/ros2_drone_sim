@@ -1,0 +1,57 @@
+{
+  "final_scores": {
+    "accuracy": 83.23,
+    "time": 95.14,
+    "final": 0.0
+  },
+  "rms_error_m": 0.0839,
+  "flight_time_s": 12.432,
+  "rings_passed": "3/3",
+  "main_culprit": "accuracy",
+  "culprit_margin": 11.91,
+  "segment_error": {
+    "S1(0-25%): 起飞→门1": {
+      "err_mean": 0.0649,
+      "err_max": 0.2435,
+      "err_p95": 0.1878,
+      "z_mean": 2.0205,
+      "z_std": 0.004,
+      "n": 116
+    },
+    "S2(25-50%): 门1→门2": {
+      "err_mean": 0.0747,
+      "err_max": 0.1109,
+      "err_p95": 0.1088,
+      "z_mean": 2.0254,
+      "z_std": 0.002,
+      "n": 87
+    },
+    "S3(50-75%): 门2→门3": {
+      "err_mean": 0.0491,
+      "err_max": 0.09,
+      "err_p95": 0.0898,
+      "z_mean": 2.0247,
+      "z_std": 0.0037,
+      "n": 84
+    },
+    "S4(75-100%): 门3→终点": {
+      "err_mean": 0.08,
+      "err_max": 0.1425,
+      "err_p95": 0.1418,
+      "z_mean": 2.0281,
+      "z_std": 0.0032,
+      "n": 87
+    }
+  },
+  "worst_segment": "S4(75-100%): 门3→终点",
+  "worst_seg_error": 0.08,
+  "z_stats": {
+    "mean_m": 2.0244,
+    "std_m": 0.0044,
+    "target_m": 2.0,
+    "bias_m": 0.0244
+  },
+  "corr_progress_vs_error": 0.045,
+  "spike_count_p99": 4,
+  "spike_avg_progress_ratio": 0.0
+}
