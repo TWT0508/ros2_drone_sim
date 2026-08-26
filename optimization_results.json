@@ -1,0 +1,247 @@
+{
+  "baseline": {
+    "params": {
+      "lookahead_distance": 0.4,
+      "lookahead_start_distance": 0.25,
+      "lookahead_end_distance": 0.7,
+      "lookahead_ramp_ratio": 0.2,
+      "straight_lookahead_distance": 0.95,
+      "turn_lookahead_distance": 0.2,
+      "turn_buffer_distance": 0.45,
+      "pass_radius": 0.5,
+      "max_track_error": 1.5,
+      "recover_track_error": 0.8,
+      "takeoff_accept_radius": 0.12,
+      "land_descent_rate": 0.3
+    },
+    "rms_error_m": 0.083870161259295,
+    "flight_time_s": 12.432012913,
+    "score": 89.1809709610705
+  },
+  "sensitivity": {
+    "lookahead_distance": 2.935,
+    "lookahead_start_distance": 0.0,
+    "lookahead_end_distance": 0.71,
+    "lookahead_ramp_ratio": 0.0,
+    "straight_lookahead_distance": 0.156,
+    "turn_lookahead_distance": 0.369,
+    "turn_buffer_distance": 0.116,
+    "pass_radius": 0.242,
+    "max_track_error": 0.0,
+    "recover_track_error": 0.0,
+    "takeoff_accept_radius": 0.091,
+    "land_descent_rate": 0.062
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "score": 91.553,
+      "rms_error_m": 0.0655,
+      "flight_time_s": 11.898,
+      "score_delta_vs_baseline": 2.372,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.225,
+        "lookahead_end_distance": 1.0806,
+        "lookahead_ramp_ratio": 0.3042,
+        "straight_lookahead_distance": 0.616,
+        "turn_lookahead_distance": 0.1078,
+        "turn_buffer_distance": 0.5396,
+        "pass_radius": 0.3789,
+        "max_track_error": 1.7628,
+        "recover_track_error": 0.8821,
+        "takeoff_accept_radius": 0.1398,
+        "land_descent_rate": 0.3448
+      }
+    },
+    {
+      "rank": 2,
+      "score": 91.471,
+      "rms_error_m": 0.06769,
+      "flight_time_s": 11.761,
+      "score_delta_vs_baseline": 2.29,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.225,
+        "lookahead_end_distance": 1.2,
+        "lookahead_ramp_ratio": 0.317,
+        "straight_lookahead_distance": 0.6,
+        "turn_lookahead_distance": 0.121,
+        "turn_buffer_distance": 0.3288,
+        "pass_radius": 0.5924,
+        "max_track_error": 2.028,
+        "recover_track_error": 0.5444,
+        "takeoff_accept_radius": 0.2279,
+        "land_descent_rate": 0.3413
+      }
+    },
+    {
+      "rank": 3,
+      "score": 91.414,
+      "rms_error_m": 0.06835,
+      "flight_time_s": 11.751,
+      "score_delta_vs_baseline": 2.233,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.225,
+        "lookahead_end_distance": 1.1558,
+        "lookahead_ramp_ratio": 0.2923,
+        "straight_lookahead_distance": 0.6598,
+        "turn_lookahead_distance": 0.2661,
+        "turn_buffer_distance": 0.8,
+        "pass_radius": 0.3,
+        "max_track_error": 1.7342,
+        "recover_track_error": 0.77,
+        "takeoff_accept_radius": 0.2253,
+        "land_descent_rate": 0.5278
+      }
+    },
+    {
+      "rank": 4,
+      "score": 91.406,
+      "rms_error_m": 0.06855,
+      "flight_time_s": 11.739,
+      "score_delta_vs_baseline": 2.225,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.2206,
+        "lookahead_end_distance": 1.1972,
+        "lookahead_ramp_ratio": 0.4,
+        "straight_lookahead_distance": 0.7146,
+        "turn_lookahead_distance": 0.2273,
+        "turn_buffer_distance": 0.5738,
+        "pass_radius": 0.3102,
+        "max_track_error": 1.6556,
+        "recover_track_error": 0.7037,
+        "takeoff_accept_radius": 0.1566,
+        "land_descent_rate": 0.2977
+      }
+    },
+    {
+      "rank": 5,
+      "score": 91.371,
+      "rms_error_m": 0.06816,
+      "flight_time_s": 11.812,
+      "score_delta_vs_baseline": 2.19,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.2233,
+        "lookahead_end_distance": 1.136,
+        "lookahead_ramp_ratio": 0.1264,
+        "straight_lookahead_distance": 0.6626,
+        "turn_lookahead_distance": 0.173,
+        "turn_buffer_distance": 0.3794,
+        "pass_radius": 0.422,
+        "max_track_error": 1.3786,
+        "recover_track_error": 0.9737,
+        "takeoff_accept_radius": 0.1599,
+        "land_descent_rate": 0.4881
+      }
+    },
+    {
+      "rank": 6,
+      "score": 91.356,
+      "rms_error_m": 0.06837,
+      "flight_time_s": 11.808,
+      "score_delta_vs_baseline": 2.175,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.225,
+        "lookahead_end_distance": 1.1731,
+        "lookahead_ramp_ratio": 0.1684,
+        "straight_lookahead_distance": 0.6,
+        "turn_lookahead_distance": 0.1826,
+        "turn_buffer_distance": 0.7255,
+        "pass_radius": 0.6217,
+        "max_track_error": 1.9839,
+        "recover_track_error": 0.5347,
+        "takeoff_accept_radius": 0.2387,
+        "land_descent_rate": 0.5184
+      }
+    },
+    {
+      "rank": 7,
+      "score": 91.338,
+      "rms_error_m": 0.06811,
+      "flight_time_s": 11.851,
+      "score_delta_vs_baseline": 2.157,
+      "params": {
+        "lookahead_distance": 0.2508,
+        "lookahead_start_distance": 0.22572000000000003,
+        "lookahead_end_distance": 0.9314,
+        "lookahead_ramp_ratio": 0.3506,
+        "straight_lookahead_distance": 1.0642,
+        "turn_lookahead_distance": 0.1131,
+        "turn_buffer_distance": 0.6769,
+        "pass_radius": 0.3266,
+        "max_track_error": 2.0238,
+        "recover_track_error": 0.5364,
+        "takeoff_accept_radius": 0.2021,
+        "land_descent_rate": 0.4255
+      }
+    },
+    {
+      "rank": 8,
+      "score": 91.32,
+      "rms_error_m": 0.06967,
+      "flight_time_s": 11.713,
+      "score_delta_vs_baseline": 2.139,
+      "params": {
+        "lookahead_distance": 0.286,
+        "lookahead_start_distance": 0.25739999999999996,
+        "lookahead_end_distance": 1.2,
+        "lookahead_ramp_ratio": 0.231,
+        "straight_lookahead_distance": 0.6,
+        "turn_lookahead_distance": 0.1714,
+        "turn_buffer_distance": 0.5045,
+        "pass_radius": 0.3482,
+        "max_track_error": 1.8053,
+        "recover_track_error": 1.0485,
+        "takeoff_accept_radius": 0.2114,
+        "land_descent_rate": 0.3494
+      }
+    },
+    {
+      "rank": 9,
+      "score": 91.304,
+      "rms_error_m": 0.06764,
+      "flight_time_s": 11.931,
+      "score_delta_vs_baseline": 2.123,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.2186,
+        "lookahead_end_distance": 1.051,
+        "lookahead_ramp_ratio": 0.2644,
+        "straight_lookahead_distance": 0.7079,
+        "turn_lookahead_distance": 0.2084,
+        "turn_buffer_distance": 0.7019,
+        "pass_radius": 0.3,
+        "max_track_error": 1.9958,
+        "recover_track_error": 0.9921,
+        "takeoff_accept_radius": 0.1629,
+        "land_descent_rate": 0.2924
+      }
+    },
+    {
+      "rank": 10,
+      "score": 91.295,
+      "rms_error_m": 0.06797,
+      "flight_time_s": 11.908,
+      "score_delta_vs_baseline": 2.114,
+      "params": {
+        "lookahead_distance": 0.25,
+        "lookahead_start_distance": 0.225,
+        "lookahead_end_distance": 1.0423,
+        "lookahead_ramp_ratio": 0.3124,
+        "straight_lookahead_distance": 0.8077,
+        "turn_lookahead_distance": 0.1129,
+        "turn_buffer_distance": 0.7315,
+        "pass_radius": 0.6011,
+        "max_track_error": 1.3486,
+        "recover_track_error": 1.07888,
+        "takeoff_accept_radius": 0.1846,
+        "land_descent_rate": 0.4245
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+        # ============================================================
+        # AI 优化参数 (来自 param_optimizer.py Top-1)
+        # 预测分数: 91.55 (基线 89.18, Δ+2.37)
+        # ============================================================
+        self.lookahead_distance = 0.25
+        self.lookahead_start_distance = 0.225
+        self.lookahead_end_distance = 1.0806
+        self.lookahead_ramp_ratio = 0.3042
+        self.straight_lookahead_distance = 0.616
+        self.turn_lookahead_distance = 0.1078
+        self.turn_buffer_distance = 0.5396
+        self.pass_radius = 0.3789
+        self.max_track_error = 1.7628
+        self.recover_track_error = 0.8821
+        self.takeoff_accept_radius = 0.1398
+        self.land_descent_rate = 0.3448
