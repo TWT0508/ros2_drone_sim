@@ -1,7 +1,8 @@
-# tep-run
+# ros2_drone_sim
+修改后的仿真代码，测试最高可跑到89.2
 ## First
 打开QGC
-## terminator 1-3
+## Terminator 1-3
 ```bash
 # 进入项目目录
 cd /home/w/Desktop/ros2_drone_sim
@@ -19,7 +20,7 @@ rviz2
 ```
 
 
-## terminator 2-3
+## Terminator 2-3
 ```bash
 source /opt/ros/humble/setup.bash
 cd ~/PX4-Autopilot/
