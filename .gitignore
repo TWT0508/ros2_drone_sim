@@ -1,0 +1,22 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ROS2
+build/
+install/
+log/
+
+# 日志文件
+*.log
+
+# 临时文件
+*.swp
+*.swo
+*~
+
+# Gazebo缓存
+.gzweb
+gazebo_logs/
