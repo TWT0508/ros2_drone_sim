@@ -57,17 +57,21 @@ class OffboardPolylineFollower(Node):
         self.gate_circle_points = 64
         self.gate_axis_length = 0.8
 
-        # Path-following parameters
-        self.lookahead_distance = 0.40
-        self.lookahead_start_distance = 0.25
-        self.lookahead_end_distance = 0.70
-        self.lookahead_ramp_ratio = 0.20
-        self.straight_lookahead_distance = 0.95
-        self.turn_lookahead_distance = 0.20
-        self.turn_buffer_distance = 0.45
-        self.max_track_error = 1.5
-        self.recover_track_error = 0.8
-        self.takeoff_accept_radius = 0.12
+        # ============================================================
+        # Path-following parameters (AI-optimized, param_optimizer.py Top-1)
+        # Baseline:  89.18 pts, RMS 0.0839m,  12.43 s
+        # Predicted: 91.55 pts, RMS 0.0655m,  11.90 s  (Δ +2.37)
+        # ============================================================
+        self.lookahead_distance = 0.25
+        self.lookahead_start_distance = 0.225
+        self.lookahead_end_distance = 1.0806
+        self.lookahead_ramp_ratio = 0.3042
+        self.straight_lookahead_distance = 0.616
+        self.turn_lookahead_distance = 0.1078
+        self.turn_buffer_distance = 0.5396
+        self.max_track_error = 1.7628
+        self.recover_track_error = 0.8821
+        self.takeoff_accept_radius = 0.1398
         self.takeoff_staging_point = np.array([-0.60, 0.0, 2.0], dtype=float)
         self.takeoff_staging_radius = 0.15
         self.takeoff_staging_z_tolerance = 0.02
@@ -81,7 +85,7 @@ class OffboardPolylineFollower(Node):
         # ------------------------------------------------------------
         # Sequential pass gating (must pass each point in order)
         # ------------------------------------------------------------
-        self.pass_radius = 0.5            # <==== pass radius you requested
+        self.pass_radius = 0.3789            # AI-optimized (was 0.5)
         self.use_3d_pass_check = True     # True: XYZ distance; False: XY only
 
         # ------------------------------------------------------------
@@ -89,8 +93,8 @@ class OffboardPolylineFollower(Node):
         # ------------------------------------------------------------
         self.finish_hold_s = 1.0
 
-        # OFFBOARD descent rate (m/s)
-        self.land_descent_rate = 0.30
+        # OFFBOARD descent rate (m/s)  — AI-optimized (was 0.30)
+        self.land_descent_rate = 0.3448
 
         # Do not command z below this during OFFBOARD descent
         self.land_min_z_cmd = 0.05
