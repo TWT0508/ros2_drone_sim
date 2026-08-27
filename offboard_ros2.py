@@ -41,13 +41,55 @@ class OffboardPolylineFollower(Node):
         self.pose_topic = "/mavros/local_position/pose"
         self.pose_timeout_s = 0.2
 
-        # Waypoints [x, y, z, yaw_deg]
+        # ============================================================
+        # POLYU aerial pattern waypoints [x, y, z, yaw_deg]
+        # (PolyU = Hong Kong Polytechnic University abbreviation)
+        # 3x2 m frame: 3 columns x 2 rows, each cell 1x1 m.
+        # Layout (3 on top, 2 on bottom):
+        #   top: P (x:0-1), O (x:1-2), L (x:2-3)        y:1-2
+        #   bot: Y (x:1-2), U (x:2-3)  [bot-left empty]  y:0-1
+        # Reading order (L->R, top->bottom): P O L Y U = POLYU
+        # Drawn in zigzag: P->O->L (top L->R), U->Y (bottom R->L).
+        # Pattern altitude z = 2.0 m (kept between 1 m and 3 m).
+        # Each letter uses 0.15 m margin inside its 1 m cell.
+        # Inter-letter transitions are axis-aligned (no diagonals).
+        # yaw_deg = 0 (orientation does not affect the drawn shape).
+        # ============================================================
         self.waypoints = [
-            [0.0, 0.0, 2.0, 0.0],
-            [2.0, 0.0, 2.0, 45.0],
-            [2.0, 2.0, 2.0, 135.0],
-            [0.0, 2.0, 2.0, -135.0],
-            [0.0, 0.5, 2.0, 0.0],
+            # --- P (top-left cell, offset 0,1) ---
+            [0.15, 1.25, 2.0, 0.0],
+            [0.15, 1.85, 2.0, 0.0],
+            [0.85, 1.85, 2.0, 0.0],
+            [0.85, 1.55, 2.0, 0.0],
+            [0.15, 1.55, 2.0, 0.0],
+            # --- O (top-mid cell, offset 1,1): octagon loop start/end at left ---
+            [1.15, 1.55, 2.0, 0.0],
+            [1.25, 1.82, 2.0, 0.0],
+            [1.50, 1.85, 2.0, 0.0],
+            [1.75, 1.82, 2.0, 0.0],
+            [1.85, 1.55, 2.0, 0.0],
+            [1.75, 1.28, 2.0, 0.0],
+            [1.50, 1.25, 2.0, 0.0],
+            [1.25, 1.28, 2.0, 0.0],
+            [1.15, 1.55, 2.0, 0.0],
+            # --- connector up O's left edge to route O->L without a diagonal ---
+            [1.15, 1.85, 2.0, 0.0],
+            # --- L (top-right cell, offset 2,1) ---
+            [2.15, 1.85, 2.0, 0.0],
+            [2.15, 1.25, 2.0, 0.0],
+            [2.85, 1.25, 2.0, 0.0],
+            # --- U (bottom-right cell, offset 2,0) ---
+            [2.85, 0.85, 2.0, 0.0],
+            [2.85, 0.25, 2.0, 0.0],
+            [2.15, 0.25, 2.0, 0.0],
+            [2.15, 0.85, 2.0, 0.0],
+            # --- Y (bottom-mid cell, offset 1,0): right arm -> junction -> left
+            #      arm -> junction (retrace) -> stem down ---
+            [1.85, 0.85, 2.0, 0.0],
+            [1.50, 0.55, 2.0, 0.0],
+            [1.15, 0.85, 2.0, 0.0],
+            [1.50, 0.55, 2.0, 0.0],
+            [1.50, 0.25, 2.0, 0.0],
         ]
 
         # Virtual gate parameters (kept, not critical for landing)
@@ -58,25 +100,27 @@ class OffboardPolylineFollower(Node):
         self.gate_axis_length = 0.8
 
         # ============================================================
-        # Path-following parameters (AI-optimized, param_optimizer.py Top-1)
-        # Baseline:  89.18 pts, RMS 0.0839m,  12.43 s
-        # Predicted: 91.55 pts, RMS 0.0655m,  11.90 s  (Δ +2.37)
+        # Path-following parameters
+        # Tuned for accuracy on the dense POLYU polyline (segments ~0.25-1.0 m).
+        # Smaller lookahead => tighter corner tracking; not chasing speed.
         # ============================================================
-        self.lookahead_distance = 0.25
-        self.lookahead_start_distance = 0.225
-        self.lookahead_end_distance = 1.0806
-        self.lookahead_ramp_ratio = 0.3042
-        self.straight_lookahead_distance = 0.616
-        self.turn_lookahead_distance = 0.1078
-        self.turn_buffer_distance = 0.5396
-        self.max_track_error = 1.7628
-        self.recover_track_error = 0.8821
-        self.takeoff_accept_radius = 0.1398
-        self.takeoff_staging_point = np.array([-0.60, 0.0, 2.0], dtype=float)
+        self.lookahead_distance = 0.12
+        self.lookahead_start_distance = 0.10
+        self.lookahead_end_distance = 0.25
+        self.lookahead_ramp_ratio = 0.40
+        self.straight_lookahead_distance = 0.20
+        self.turn_lookahead_distance = 0.08
+        self.turn_buffer_distance = 0.25
+        self.max_track_error = 1.00
+        self.recover_track_error = 0.50
+        self.takeoff_accept_radius = 0.14
+        # Takeoff to 3 m first (per requirement: initial altitude 3 m),
+        # then descend to the pattern altitude (2 m) during the approach.
+        self.takeoff_staging_point = np.array([0.0, 0.0, 3.0], dtype=float)
         self.takeoff_staging_radius = 0.15
-        self.takeoff_staging_z_tolerance = 0.02
-        self.takeoff_approach_point = np.array([-0.30, 0.0, 2.0], dtype=float)
-        self.takeoff_approach_radius = 0.08
+        self.takeoff_staging_z_tolerance = 0.05
+        self.takeoff_approach_point = np.array([0.15, 1.25, 2.5], dtype=float)
+        self.takeoff_approach_radius = 0.10
         self.final_accept_radius = 0.4  # kept but NOT used for finish trigger anymore
         self.trajectory_max_len = 200
         self.search_back_segments = 1
@@ -85,7 +129,7 @@ class OffboardPolylineFollower(Node):
         # ------------------------------------------------------------
         # Sequential pass gating (must pass each point in order)
         # ------------------------------------------------------------
-        self.pass_radius = 0.3789            # AI-optimized (was 0.5)
+        self.pass_radius = 0.15            # tight for dense POLYU waypoints
         self.use_3d_pass_check = True     # True: XYZ distance; False: XY only
 
         # ------------------------------------------------------------
@@ -294,37 +338,13 @@ class OffboardPolylineFollower(Node):
     # ============================================================
 
     def build_expanded_path(self):
-        self.expanded_waypoints = []
+        # POLYU aerial pattern: use waypoints directly without gate expansion.
+        # The gate pre/post expansion would distort the letter shapes, so the
+        # POLYU polyline is consumed as-is (one waypoint == one path vertex).
+        self.expanded_waypoints = [
+            self.original_wp[i, 0:3].copy() for i in range(self.original_wp.shape[0])
+        ]
         self.gates = []
-
-        n = self.original_wp.shape[0]
-        self.expanded_waypoints.append(self.original_wp[0, 0:3].copy())
-
-        for i in range(1, n - 1):
-            center = self.original_wp[i, 0:3].copy()
-            yaw_deg = float(self.original_wp[i, 3])
-            yaw_rad = math.radians(yaw_deg)
-            forward = np.array([math.cos(yaw_rad), math.sin(yaw_rad), 0.0], dtype=float)
-
-            pre_point = center - self.gate_pre_distance * forward
-            post_point = center + self.gate_post_distance * forward
-
-            self.expanded_waypoints.append(pre_point)
-            self.expanded_waypoints.append(center)
-            self.expanded_waypoints.append(post_point)
-
-            self.gates.append({
-                "index": i,
-                "center": center,
-                "yaw_deg": yaw_deg,
-                "yaw_rad": yaw_rad,
-                "forward": forward,
-                "pre_point": pre_point,
-                "post_point": post_point,
-                "diameter": self.gate_diameter
-            })
-
-        self.expanded_waypoints.append(self.original_wp[-1, 0:3].copy())
 
     # ============================================================
     # Callbacks
